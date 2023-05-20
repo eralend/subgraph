@@ -1,0 +1,26 @@
+type User @entity {
+  id: ID!
+  address: Bytes!
+  transactions: [Transaction!] @derivedFrom(field: "user")
+}
+
+type Transaction @entity {
+  id: ID!
+  user: User!
+  amount: BigInt!
+  token: Bytes
+  action: String!
+  timestamp: BigInt!
+  block: BigInt!
+}
+
+type State @entity {
+  id: ID!
+  totalAddresses: BigInt!
+  totalTransactions: BigInt!
+}
+
+type DailyUser @entity {
+  id: ID!
+  totalUsers: BigInt!
+}

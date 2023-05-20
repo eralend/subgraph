@@ -1,0 +1,60 @@
+specVersion: 0.0.2
+description: Eralend Subgraph
+repository: https://github.com/eralend/subgraph
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: nUSDC
+    network: {{network}}
+    source:
+      address: '{{nUSDCAddress}}'
+      abi: CErc20
+      startBlock: {{nUSDCStartBlock}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mapping.ts
+      entities:
+        - User
+        - Transaction
+      abis:
+        - name: CErc20
+          file: ./abis/CErc20.json
+      eventHandlers:
+        - event: Mint(address,uint256,uint256)
+          handler: handleMint
+        - event: Borrow(address,uint256,uint256,uint256)
+          handler: handleBorrow
+        - event: Redeem(address,uint256,uint256)
+          handler: handleRedeem
+        - event: RepayBorrow(address,address,uint256,uint256,uint256)
+          handler: handleRepayBorrow
+  - kind: ethereum/contract
+    name: nETH
+    network: {{network}}
+    source:
+      address: '{{nETHAddress}}'
+      abi: CErc20
+      startBlock: {{nETHStartBlock}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mapping.ts
+      entities:
+        - User
+        - Transaction
+      abis:
+        - name: CErc20
+          file: ./abis/CErc20.json
+      eventHandlers:
+        - event: Mint(address,uint256,uint256)
+          handler: handleMint
+        - event: Borrow(address,uint256,uint256,uint256)
+          handler: handleBorrow
+        - event: Redeem(address,uint256,uint256)
+          handler: handleRedeem
+        - event: RepayBorrow(address,address,uint256,uint256,uint256)
+          handler: handleRepayBorrow

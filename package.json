@@ -1,0 +1,22 @@
+{
+  "name": "eralend-subgraph",
+  "author": "Eralend",
+  "version": "0.1.0",
+  "scripts": {
+    "prepare": "mustache ./config/${NETWORK:-zkSync2-testnet}.json ${BLOCKCHAIN:-zksync}.subgraph.template.yaml > subgraph.yaml && npm run subgraph:codegen",
+    "subgraph:codegen": "graph codegen --output-dir ./generated",
+    "subgraph:build": "graph build",
+    "subgraph:deploy": "graph deploy --studio eralend --access-token $ACCESS_TOKEN",
+    "deploy-era": "BLOCKCHAIN=zksync NETWORK=zkSync-era env-cmd npm run prepare && SLUG=eralend/eralend npm run subgraph:deploy"
+  },
+  "devDependencies": {
+    "@graphprotocol/graph-cli": "^0.43.0",
+    "@graphprotocol/graph-ts": "^0.29.3"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "babel-register": "^6.26.0",
+    "env-cmd": "^10.1.0",
+    "mustache": "^4.2.0"
+  }
+}
