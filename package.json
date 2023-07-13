@@ -10,7 +10,7 @@
     "deploy-era": "BLOCKCHAIN=zksync NETWORK=zkSync-era env-cmd npm run prepare && SLUG=eralend/eralend npm run subgraph:deploy"
   },
   "devDependencies": {
-    "@graphprotocol/graph-cli": "^0.43.0",
+    "@graphprotocol/graph-cli": "^0.51.2",
     "@graphprotocol/graph-ts": "^0.29.3"
   },
   "dependencies": {

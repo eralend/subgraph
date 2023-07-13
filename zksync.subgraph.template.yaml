@@ -58,3 +58,30 @@ dataSources:
           handler: handleRedeem
         - event: RepayBorrow(address,address,uint256,uint256,uint256)
           handler: handleRepayBorrow
+  - kind: ethereum/contract
+    name: eETHUSDC_SLP
+    network: {{network}}
+    source:
+      address: '{{eETHUSDC_SLPAddress}}'
+      abi: CErc20
+      startBlock: {{eETHUSDC_SLPStartBlock}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mapping.ts
+      entities:
+        - User
+        - Transaction
+      abis:
+        - name: CErc20
+          file: ./abis/CErc20.json
+      eventHandlers:
+        - event: Mint(address,uint256,uint256)
+          handler: handleMint
+        - event: Borrow(address,uint256,uint256,uint256)
+          handler: handleBorrow
+        - event: Redeem(address,uint256,uint256)
+          handler: handleRedeem
+        - event: RepayBorrow(address,address,uint256,uint256,uint256)
+          handler: handleRepayBorrow
